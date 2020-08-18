@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from uploading_app import views
+from .product_making_plot import qun_prod_cat
+from .product_making_plot import qun_prod_in_ord
+from .product_making_plot import qun_ord_of_client
+from .product_making_plot import qun_ord_sel
+from .product_making_plot import income_cat
+
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -9,5 +14,35 @@ def home_view(request, *args, **kwargs):
     return render(request,"home.html", {})
 
 def plots_page_view(request, *args, **kwargs):
+
     return render(request, "plots_page.html", {})
+
+
+def plots(request, id):
+    # oddaj w argumencie nazwe pliku
+
+    nazwa=""
+    id = int(id)
+    if id == 1:
+        qun_prod_cat()
+        nazwa="qun_prod_cat.png"
+    elif id == 2:
+        qun_prod_in_ord()
+        nazwa = "qun_prod_in_ord.png"
+    elif id == 3:
+        qun_ord_of_client()
+        nazwa = "qun_ord_of_client.png"
+    elif id == 4:
+        qun_ord_sel()
+        nazwa = "qun_ord_of_sel.png"
+    elif id == 5:
+        income_cat()
+        nazwa = "income_cat.png"
+
+    args={
+        "nazwa": nazwa
+    }
+
+    return render(request, "plots_page.html", args)
+
 

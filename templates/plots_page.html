@@ -4,21 +4,24 @@
       <div class="row justify-content-center align-items-center">
       </div>
         <div class="row justify-content-center align-items-center h-100">
-            <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <form action="">
-                    <div class="form-group">
-                      <select class="form-control">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                      </select>
-                    </div>
-                </form>
+            <div class="col col-sm-6 col-md-6">
+                        <div class="row">
+                            <button><a href="{% url 'pages_app:ploter' id="1" %}">Wykres ilości produktów kupionych ze względu na kategorie</a></button>
+                            <button><a href="{% url 'pages_app:ploter' id="2" %}">Wykres ilości przedmiotów w jednym zamówieniu</a></button>
+                        </div>
+                        <div class="row">
+                            <button><a href="{% url 'pages_app:ploter' id="3" %}">Wykres ilości zamówień złożonych przez klienta</a></button>
+                            <button><a href="{% url 'pages_app:ploter' id="4" %}">Wykres ilości zamówień obsłużonych przez sprzedawce</a></button>
+                        </div>
+                        <div class="row">
+                            <button><a href="{% url 'pages_app:ploter' id="5" %}">Wykres przychodów ze względu na kategorię</a></button>
+                            <button><a href="{% url 'pages_app:ploter' id="6" %}">Wykres 6</a></button>
+                        </div>
             </div>
-        </div>
     </div>
-    <div class="row1">
-                        <div class="col-md-1">
-                            <img src="../static/cena_id_produktu.png" class="img-fluid" alt="Responsive image">
+    <div class="row text-center">
+                        <div class="col-md-12">
+                            <img src="../../static/{{ nazwa }}" class="img-responsive center-block" alt="Responsive image">
                         </div>
     </div>
 

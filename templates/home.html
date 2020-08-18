@@ -1,1 +1,29 @@
 {% extends 'base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container-fluid h-100 bg-light text-dark">
+          <div class="row justify-content-center align-items-center">
+          </div>
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col col-sm-6 col-md-6">
+                           <div class="row text-center center">
+                               <h1>Jesteś zalogowany! Możesz korzystać z narzędzi.</h1>
+                           </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid h-100 bg-light text-dark">
+              <div class="row justify-content-center align-items-center">
+              </div>
+                <div class="row justify-content-center align-items-center h-100">
+                    <div class="col col-sm-6 col-md-6">
+                               <div class="row">
+                                   <h1>Witaj! Zaloguj się do aplikacji.</h1>
+                               </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+{% endblock %}
