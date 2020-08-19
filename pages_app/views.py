@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from uploading_app import views
+
 
 # Create your views here.
 def home_view(request, *args, **kwargs):

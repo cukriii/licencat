@@ -6,6 +6,5 @@ from pages_app.views import home_view
 
 urlpatterns = [
     path('plots/', plots_page_view, name='plots'),
-    path('home/', home_view, name='home'),
-    path('upload_files', upload_files, name= 'upload )
+    path('home/', home_view, name='home')
 ]
