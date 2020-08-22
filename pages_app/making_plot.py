@@ -25,7 +25,9 @@ def qun_prod_cat():
     category_vc = merged_prod_cat["Nazwa_kategorii"].value_counts()
     category_vc = category_vc.to_frame()
     sns.barplot(x=category_vc.index, y="Nazwa_kategorii", palette="ch:.25", data=category_vc)
+    plt.title("Wykres ilośći kupionych produktów w zależności od kategorii")
     plt.ylabel("Ilość wystąpień")
+    plt.xlabel("Nazwa kategorii")
     plt.xticks(
         rotation=65,
         horizontalalignment='right',
@@ -48,7 +50,7 @@ def qun_prod_in_ord():
     counted_v = counted["Id_zamowienia"].value_counts()
     counted_v_df = pd.DataFrame(counted_v)
     counted_v_df = counted_v_df.sort_index()
-    plt.title("Wykresy ilości przedmiotów w jednym zamówieniu")
+    plt.title("Ilość przedmiotów w jednym zamówieniu")
     sns.barplot(x=counted_v_df.index, y="Id_zamowienia", palette="ch:.25", data=counted_v_df)
     plt.ylabel("Ilość zamówień")
     plt.xlabel("Ilość przedmiotów")
@@ -91,7 +93,6 @@ def qun_ord_sel():
     df_ord_sel = pd.merge(df_ord_sel, df_seller)
     plt.title("Ilość zamówień obsłużonych przez sprzedawce")
     sns.barplot(x="Imie", y="Ilosc_zam", data=df_ord_sel)
-    plt.yticks([5, 10, 15, 20])
     plt.xlabel("Sprzedawca")
     plt.ylabel("Ilość zamówień")
     plt.savefig('static/{}'.format("qun_ord_of_sel"))
@@ -156,5 +157,48 @@ def income_cat():
     sns.barplot(x="Nazwa", y="Przychod", data=df_profit)
     plt.xlabel("Nazwa kategorii")
     plt.ylabel("Przychód")
+    plt.xticks(
+        rotation=65,
+        horizontalalignment='right',
+        fontweight='light',
+        fontsize='10'
+    )
     plt.savefig('static/{}'.format("income_cat"))
+    plt.clf()
+
+def income_month():
+    #przychód z danego miesiąca
+
+    df_ord = pd.read_csv("static/zamowienie.csv")
+    df_po = pd.read_csv("static/produkty_zamowienia.csv")
+    df_prod = pd.read_csv("static/produkt.csv")
+
+    sns.set()
+    df_merged = pd.merge(df_ord, df_po)
+    df_merged = pd.merge(df_merged, df_prod)
+    df_income_12 = df_merged[df_merged.Data < "2020-01-01"]
+    df_income_01 = df_merged[(df_merged.Data >= "2020-01-01") & (df_merged.Data < "2020-02-01")]
+    df_income_02 = df_merged[(df_merged.Data >= "2020-02-01") & (df_merged.Data < "2020-03-01")]
+    df_income_03 = df_merged[(df_merged.Data >= "2020-03-01") & (df_merged.Data < "2020-04-01")]
+    df_income_04 = df_merged[(df_merged.Data >= "2020-04-01") & (df_merged.Data < "2020-05-01")]
+    df_income_05 = df_merged[(df_merged.Data >= "2020-05-01") & (df_merged.Data < "2020-06-01")]
+    sum12 = df_income_12.Cena.sum()
+    sum01 = df_income_01.Cena.sum()
+    sum02 = df_income_02.Cena.sum()
+    sum03 = df_income_03.Cena.sum()
+    sum04 = df_income_04.Cena.sum()
+    sum05 = df_income_05.Cena.sum()
+    df_whole_income = pd.DataFrame(columns=["suma"])
+    df_whole_income.loc[0] = sum12
+    df_whole_income.loc[1] = sum01
+    df_whole_income.loc[2] = sum02
+    df_whole_income.loc[3] = sum03
+    df_whole_income.loc[4] = sum04
+    df_whole_income.loc[5] = sum05
+    plt.title("Przychód każdego miesiąca")
+    sns.barplot(x=df_whole_income.index, y="suma", data=df_whole_income)
+    plt.xlabel("Miesiąc")
+    plt.ylabel("Przychód")
+    plt.xticks([0,1,2,3,4,5], ["Grudzień", "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj"])
+    plt.savefig('static/{}'.format("income_month"))
     plt.clf()

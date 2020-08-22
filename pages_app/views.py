@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .product_making_plot import qun_prod_cat
-from .product_making_plot import qun_prod_in_ord
-from .product_making_plot import qun_ord_of_client
-from .product_making_plot import qun_ord_sel
-from .product_making_plot import income_cat
-
+from .making_plot import qun_prod_cat
+from .making_plot import qun_prod_in_ord
+from .making_plot import qun_ord_of_client
+from .making_plot import qun_ord_sel
+from .making_plot import income_cat
+from .making_plot import income_month
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -38,6 +38,9 @@ def plots(request, id):
     elif id == 5:
         income_cat()
         nazwa = "income_cat.png"
+    elif id == 6:
+        income_month()
+        nazwa = "income_month.png"
 
     args={
         "nazwa": nazwa
